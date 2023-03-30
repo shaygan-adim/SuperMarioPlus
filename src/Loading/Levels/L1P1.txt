@@ -1,0 +1,44 @@
+Floor
+3
+0 676 100 1879
+2078 676 100 2351
+4629 676 100 491
+
+Block
+35
+int[] coordinates5 = {352,495};
+        int[] coordinates6 = {432,495};
+        int[] coordinates7 = {627,399};
+        int[] coordinates8 = {627,164-47};
+        int[] coordinates9 = {891,399};
+        int[] coordinates10 = {968,399};
+        int[] coordinates11 = {1050,399};
+        int[] coordinates12 = {971,164};
+        int[] coordinates13 = {1697,337};
+        int[] coordinates14 = {1777,337};
+        int[] coordinates15 = {1736,91};
+        int[] coordinates16 = {2064,496};
+        int[] coordinates17 = {2194,416};
+        int[] coordinates18 = {2274,416};
+        int[] coordinates19 = {2355,245};
+        int[] coordinates20 = {2354,0};
+        int[] coordinates21 = {2434,0};
+        int[] coordinates22 = {2768,496};
+
+        int[] coordinates24 = {2767,245};
+        int[] coordinates25 = {2847,245};
+        int[] coordinates26 = {3374+55,355};
+        int[] coordinates27 = {3454+55,355};
+        int[] coordinates28 = {3534+55,355};
+        int[] coordinates29 = {3611+55,275};
+        int[] coordinates30 = {3612,42};
+        int[] coordinates31 = {4016,438};
+        int[] coordinates32 = {4096,438};
+        int[] coordinates33 = {4096,205};
+        int[] coordinates34 = {4799,437};
+        int[] coordinates35 = {4879,437};
+        int[] coordinates36 = {4959,437};
+        int[] coordinates37 = {5039,437};
+        int[] coordinates38 = {4799,204};
+        int[] coordinates39 = {4879,204};
+        int[] coordinates395 = {4720,517};
