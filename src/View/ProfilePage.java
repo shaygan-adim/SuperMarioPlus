@@ -7,6 +7,8 @@ import Model.User;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class ProfilePage extends MainFrame{
@@ -44,6 +46,25 @@ public class ProfilePage extends MainFrame{
 
         backButton.setFocusPainted(false);
         logoutButton.setFocusPainted(false);
+
+        // Setting listeners
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure ?", "", JOptionPane.YES_NO_OPTION);
+                if (dialogResult==JOptionPane.YES_OPTION){
+                    new FirstPage();
+                    ProfilePage.super.dispose();
+                }
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainPage(user);
+                ProfilePage.super.dispose();
+            }
+        });
 
         // Adding the components and setting the locations
         super.mainPanel.add(usernameLabel);

@@ -1,8 +1,13 @@
 package View;
 
 import Loading.ImageLoader;
+import Loading.UserLoader;
+import Model.User;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class LoginPage extends MainFrame {
@@ -31,6 +36,50 @@ public class LoginPage extends MainFrame {
 
         loginButton.setFocusPainted(false);
         backButton.setFocusPainted(false);
+
+        // Setting listeners
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FirstPage();
+                LoginPage.super.dispose();
+            }
+        });
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (usernameField.getText().equals("") || new String(passwordField.getPassword()).equals("")){
+                    JOptionPane.showMessageDialog(null,"Empty inputs are not acceptable. Try again.","Empty Input Error",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    try {
+                        UserLoader.loadUsers();
+                    } catch (IOException ignored) {}
+                    User thisUser=null;
+                    boolean found = false;
+                    User[] users = UserLoader.getUsers();
+                    if (users!=null){
+                        for (User user : users){
+                            if (user.getUsername().equals(usernameField.getText())){
+                                if (user.getPassword().equals(new String(passwordField.getPassword()))){
+                                    thisUser = user;
+                                    new MainPage(thisUser);
+                                    LoginPage.super.dispose();
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"Password is wrong. Try again.","Wrong Password",JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                found=true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!found){
+                        JOptionPane.showMessageDialog(null,"Username not found. Try again.","Username Not Found",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+        });
 
         // Adding the components and setting the locations
         super.mainPanel.add(usernameLabel);

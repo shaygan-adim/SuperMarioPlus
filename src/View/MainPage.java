@@ -2,11 +2,12 @@ package View;
 
 import Loading.ImageLoader;
 import Model.HeroName;
-import Model.Mario;
 import Model.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class MainPage extends MainFrame{
@@ -50,6 +51,15 @@ public class MainPage extends MainFrame{
         shopButton.setFocusPainted(false);
         leaderboardButton.setFocusPainted(false);
         profileButton.setFocusPainted(false);
+
+        // Setting listeners
+        profileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ProfilePage(user);
+                MainPage.super.dispose();
+            }
+        });
 
         // Adding the components and setting the locations
         super.mainPanel.add(playButton);

@@ -3,6 +3,8 @@ package View;
 import Loading.ImageLoader;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class FirstPage extends MainFrame {
@@ -27,6 +29,30 @@ public class FirstPage extends MainFrame {
         loginButton.setFont(new Font("Forte",Font.BOLD,25));
         registerButton.setFont(new Font("Forte",Font.BOLD,25));
         exitButton.setFont(new Font("Forte",Font.BOLD,20));
+
+        // Setting listeners
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FirstPage.super.dispose();
+            }
+        });
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RegisterPage();
+                FirstPage.super.dispose();
+            }
+        });
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginPage();
+                FirstPage.super.dispose();
+            }
+        });
+
+
 
         // Adding the buttons and setting the locations
         super.mainPanel.add(loginButton);
