@@ -1,7 +1,6 @@
 package View;
 
 import Loading.ImageLoader;
-import Model.Mario;
 import Model.User;
 
 import javax.swing.*;
@@ -85,10 +84,5 @@ public class ProfilePage extends MainFrame{
         backButton.setBounds(135,400,90,40);
         logoutButton.setBounds(255,400,90,40);
 
-    }
-    public static void main(String[] args) throws IOException {
-        ImageLoader.load();
-        User user1 = new User("Shaygan","123",10,null,null,null);
-        new ProfilePage(user1);
     }
 }

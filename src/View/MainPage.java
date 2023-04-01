@@ -86,9 +86,4 @@ public class MainPage extends MainFrame{
         leaderboardButton.setBounds(35,360,105,30);
         characterLabel.setBounds(195,370,100,100);
     }
-    public static void main(String[] args) throws IOException {
-        ImageLoader.load();
-        User user1 = new User("Shaygan","123",10,null,null,HeroName.MARIO);
-        new MainPage(user1);
-    }
 }

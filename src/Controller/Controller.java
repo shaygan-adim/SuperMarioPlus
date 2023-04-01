@@ -1,8 +1,7 @@
 package Controller;
 
-import Model.Level;
+import Model.Part;
 import Model.PhysicsHandler;
-import Model.Pipe;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -10,12 +9,12 @@ import java.awt.event.KeyListener;
 public class Controller implements KeyListener{
     // Fields
     private boolean[] keyPressed = {false,false};
-    private Level level;
+    private Part part;
     private PhysicsHandler physicsHandler;
 
     // Constructor
-    public Controller(Level level, PhysicsHandler physicsHandler){
-        this.level = level;
+    public Controller(Part part, PhysicsHandler physicsHandler){
+        this.part = part;
         this.physicsHandler = physicsHandler;
     }
 

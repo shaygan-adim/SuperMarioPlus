@@ -2,7 +2,6 @@ package View;
 
 import Loading.ImageLoader;
 import Loading.UserLoader;
-import Model.HeroName;
 import Model.User;
 
 import javax.swing.*;
@@ -82,8 +81,7 @@ public class RegisterPage extends MainFrame {
                             JOptionPane.showMessageDialog(null,"Confirm field is not equal to the password. Try again.","Password Error",JOptionPane.INFORMATION_MESSAGE);
                         }
                         else{
-                            HeroName[] ownedHeroes = {HeroName.MARIO};
-                            new User(usernameField.getText(),new String(passwordField.getPassword()),0,null,ownedHeroes,HeroName.MARIO);
+                            new User(usernameField.getText(),new String(passwordField.getPassword()));
                             JOptionPane.showMessageDialog(null,"User created successfully.","",JOptionPane.INFORMATION_MESSAGE);
                             new FirstPage();
                             RegisterPage.super.dispose();
@@ -221,9 +219,4 @@ public class RegisterPage extends MainFrame {
         registerButton.setBounds(250,430,95,30);
         backButton.setBounds(150,430,95,30);
     }
-    public static void main(String[] args) throws IOException {
-        ImageLoader.load();
-        new RegisterPage();
-    }
-
 }

@@ -3,14 +3,13 @@ package Model;
 public class Coin extends Item{
     // Fields
     private double[] coordinates;
-    private final int width,height;
+    private final int width = 36;
+    private final int height = 36;
     boolean visible = true;
 
     // Constructor
-    public Coin(double[] coordinates, double vy, int width, int height){
+    public Coin(double[] coordinates){
         this.coordinates = coordinates;
-        this.width = width;
-        this.height = height;
     }
 
     // Setters
@@ -19,6 +18,8 @@ public class Coin extends Item{
 
     // Getters
     public double[] getCoordinates() {return coordinates;}
+    public double getX(){return coordinates[0];}
+    public double getY(){return coordinates[1];}
     public boolean isVisible() {return visible;}
     public int getWidth() {return width;}
     public int getHeight() {return height;}

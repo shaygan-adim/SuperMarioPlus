@@ -97,9 +97,4 @@ public class LoginPage extends MainFrame {
         loginButton.setBounds(255,400,80,30);
         backButton.setBounds(155,400,80,30);
     }
-    public static void main(String[] args) throws IOException {
-        ImageLoader.load();
-        new LoginPage();
-    }
-
 }

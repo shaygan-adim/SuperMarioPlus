@@ -5,8 +5,8 @@ public class Pipe extends PhysicalObject{
     private Plant plantInside;
 
     // Constructor
-    public Pipe(int[] coordinates, int height, int width, Plant plant) {
-        super(coordinates, height, width);
+    public Pipe(int[] coordinates, Plant plant) {
+        super(coordinates, 150, 150);
         this.plantInside = plant;
     }
 

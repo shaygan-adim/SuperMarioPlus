@@ -11,20 +11,18 @@ public class User {
     // Fields
     private String username;
     private String password;
-    private int coin;
+    private int coin = 0;
     private int highscore = 0;
     private Level[] levels;
-    private HeroName[] ownedHeroes;
-    private HeroName activeHero;
+    private HeroName[] ownedHeroes = new HeroName[]{HeroName.MARIO};
+    private HeroName activeHero = HeroName.MARIO;
+
 
     // Constructor
-    public User(String username,String password,int coin,Level[] levels,HeroName[] ownedHeroes,HeroName activeHero){
+    public User(String username, String password){
         this.username = username;
         this.password = password;
         this.coin = coin;
-        this.levels = levels;
-        this.ownedHeroes = ownedHeroes;
-        this.activeHero = activeHero;
 
         try {
             this.save();
@@ -32,9 +30,6 @@ public class User {
         try {
             UserLoader.loadUsers();
         } catch (IOException e) {}
-
-
-
     }
 
     // Methods
@@ -71,7 +66,7 @@ public class User {
     // Setters
     public void setCoin(int coin) {this.coin = coin;}
     public void setHighscore(int highscore) {this.highscore = highscore;}
-    public void setLevels(Level[] levels) {this.levels = levels;}
+    public void setLevels(Part[] parts) {this.levels = levels;}
     public void setOwnedHeroes(HeroName[] ownedHeroes) {this.ownedHeroes = ownedHeroes;}
     public void setActiveHero(HeroName activeHero) {this.activeHero = activeHero;}
 }

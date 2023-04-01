@@ -16,12 +16,14 @@ abstract public class ImageLoader {
     private static Image marioToLeftImage;
     private static Image plantImage;
     private static Image L1P1Image;
+    private static Image L1P2Image;
     private static ImageIcon icon;
     private static ImageIcon yImage;
     private static ImageIcon nImage;
     private static ImageIcon coinImage;
     private static ImageIcon coinBiggerImage;
     private static Image coinInGameImage;
+    private static ImageIcon heartImage;
     private static ImageIcon marioImage;
     private static ImageIcon marioSmallImage;
 
@@ -40,6 +42,7 @@ abstract public class ImageLoader {
 
         // Loading levels
         ImageLoader.L1P1Image = ImageIO.read(new File("src/Loading/Graphics/Levels/L1P1.jpg"));
+        ImageLoader.L1P2Image = ImageIO.read(new File("src/Loading/Graphics/Levels/L1P2.jpg"));
 
         // Loading other stuff
         ImageLoader.yImage = new ImageIcon("src/Loading/Graphics/Other/Y.png");
@@ -47,6 +50,7 @@ abstract public class ImageLoader {
         ImageLoader.coinImage = new ImageIcon("src/Loading/Graphics/Other/Coin.png");
         ImageLoader.coinBiggerImage = new ImageIcon("src/Loading/Graphics/Other/CoinBigger.png");
         ImageLoader.coinInGameImage = ImageIO.read(new File("src/Loading/Graphics/Other/CoinInGAme.png"));
+        ImageLoader.heartImage = new ImageIcon("src/Loading/Graphics/Other/Heart.png");
         ImageLoader.marioImage = new ImageIcon("src/Loading/Graphics/Characters/Mario/Mario.png");
         ImageLoader.marioSmallImage = new ImageIcon("src/Loading/Graphics/Characters/Mario/MarioSmall.png");
         ImageLoader.icon = new ImageIcon("src/Loading/Graphics/Other/icon.png");
@@ -61,11 +65,13 @@ abstract public class ImageLoader {
     public static Image getMarioToLeftImage() {return marioToLeftImage;}
     public static Image getPlantImage() {return plantImage;}
     public static Image getL1P1Image() {return L1P1Image;}
+    public static Image getL1P2Image() {return L1P2Image;}
     public static ImageIcon getyImage() {return yImage;}
     public static ImageIcon getnImage() {return nImage;}
     public static ImageIcon getCoinImage() {return coinImage;}
     public static ImageIcon getCoinBiggerImage() {return coinBiggerImage;}
     public static Image getCoinInGameImage() {return coinInGameImage;}
+    public static ImageIcon getHeartImage() {return heartImage;}
     public static ImageIcon getMarioImage() {return marioImage;}
     public static ImageIcon getMarioSmallImage() {return marioSmallImage;}
     public static ImageIcon getIcon() {return icon;}

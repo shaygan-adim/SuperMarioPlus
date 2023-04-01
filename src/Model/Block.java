@@ -5,8 +5,8 @@ public class Block extends PhysicalObject{
     private Item itemInside;
 
     // Constructor
-    public Block(int[] coordinates, int height, int width, Item itemInside) {
-        super(coordinates, height, width);
+    public Block(int[] coordinates, Item itemInside) {
+        super(coordinates,80, 80);
         this.itemInside = itemInside;
     }
     // Setters

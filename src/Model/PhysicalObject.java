@@ -23,6 +23,8 @@ abstract public class PhysicalObject {
 
     // Getters
     public int[] getCoordinates() {return coordinates;}
+    public int getX(){return coordinates[0];}
+    public int getY(){return coordinates[1];}
     public int getHeight() {return height;}
     public int getWidth() {return width;}
 }

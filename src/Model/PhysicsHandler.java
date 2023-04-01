@@ -2,7 +2,7 @@ package Model;
 
 public class PhysicsHandler {
     // Fields
-    private Level level;
+    private final Level level;
     private static int g = -5;
     private static final double dt = 0.1D;
 
@@ -13,67 +13,92 @@ public class PhysicsHandler {
 
     // Methods
     public void updatePhysics(){
-        for (Hero hero : level.getHeroes()){
+        for (Hero hero : level.getActivePart().getHeroes()){
             hero.setVy(hero.getVy()+g*dt);
             int n = 0;
             // Handling the physics of blocks
-            for (Block block : level.getBlocks()){
-                if (hero.getY()-hero.getVy()*dt>=block.getCoordinates()[1]-hero.getHeight() && hero.getY()+ hero.getHeight()<block.getCoordinates()[1]+block.getHeight() && hero.getX()>block.getCoordinates()[0]-hero.getWidth() && hero.getX()<block.getCoordinates()[0]+ block.getWidth()) {
+            for (Block block : level.getActivePart().getBlocks()){
+                if (hero.getY()-hero.getVy()*dt>=block.getY()-hero.getHeight() && hero.getY()+ hero.getHeight()<block.getY()+block.getHeight() && hero.getX()>block.getX()-hero.getWidth() && hero.getX()<block.getX()+ block.getWidth()) {
                     hero.setVy(0);
                     g=0;
                 }
                 else{
                     n++;
                 }
-                if (hero.getY()- hero.getVy()*dt<block.getCoordinates()[1]+block.getHeight() && hero.getY()>=block.getCoordinates()[1]-hero.getHeight() && hero.getX()>block.getCoordinates()[0]-hero.getWidth() && hero.getX()<block.getCoordinates()[0]+ block.getWidth()){
+                if (hero.getY()- hero.getVy()*dt<block.getY()+block.getHeight() && hero.getY()>=block.getY()-hero.getHeight() && hero.getX()>block.getX()-hero.getWidth() && hero.getX()<block.getX()+ block.getWidth()){
                     hero.setVy(0);
+                    if (block.getItemInside() instanceof Coin){
+                        hero.addCoin();
+                    }
                 }
-                if (hero.getY()+hero.getHeight()>block.getCoordinates()[1] && hero.getY()<block.getCoordinates()[1]+block.getHeight() && hero.getX()+ hero.getWidth()+hero.getVx()*dt>block.getCoordinates()[0] && hero.getX()<block.getCoordinates()[0]){
+                if (hero.getY()+hero.getHeight()>block.getY() && hero.getY()<block.getY()+block.getHeight() && hero.getX()+ hero.getWidth()+hero.getVx()*dt>block.getX() && hero.getX()<block.getX()){
                     hero.setVx(0);
                 }
-                if (hero.getY()+hero.getHeight()>block.getCoordinates()[1] && hero.getY()<block.getCoordinates()[1]+block.getHeight() && hero.getX()+hero.getVx()*dt<block.getCoordinates()[0]+ block.getWidth() && hero.getX()+ hero.getWidth()>block.getCoordinates()[0]+block.getWidth()){
+                if (hero.getY()+hero.getHeight()>block.getY() && hero.getY()<block.getY()+block.getHeight() && hero.getX()+hero.getVx()*dt<block.getX()+ block.getWidth() && hero.getX()+ hero.getWidth()>block.getX()+block.getWidth()){
                     hero.setVx(0);
                 }
             }
 
             // Handling the physics of pipes
-            for (Pipe pipe : level.getPipes()){
-                if (hero.getY()-hero.getVy()*dt>=pipe.getCoordinates()[1]-hero.getHeight() && hero.getY()+ hero.getHeight()<pipe.getCoordinates()[1]+pipe.getHeight() && hero.getX()>pipe.getCoordinates()[0]-hero.getWidth() && hero.getX()<pipe.getCoordinates()[0]+ pipe.getWidth()) {
+            for (Pipe pipe : level.getActivePart().getPipes()){
+                if (hero.getY()-hero.getVy()*dt>=pipe.getY()-hero.getHeight() && hero.getY()+ hero.getHeight()<pipe.getY()+pipe.getHeight() && hero.getX()>pipe.getX()-hero.getWidth() && hero.getX()<pipe.getX()+ pipe.getWidth()) {
                     hero.setVy(0);
                     g=0;
+                    if (pipe.getPlant()!=null){
+                        if (pipe.getPlant().isVisible()){
+                            if (hero.getLives()>=2){
+                                hero.setLives(hero.getLives()-1);
+                                hero.setCoordinates(new double[]{150,200});
+                            }
+                            else{
+                                // TODO
+                            }
+                        }
+                    }
                 }
                 else{
                     n++;
                 }
-                if (hero.getY()- hero.getVy()*dt<pipe.getCoordinates()[1]+pipe.getHeight() && hero.getY()>=pipe.getCoordinates()[1]-hero.getHeight() && hero.getX()>pipe.getCoordinates()[0]-hero.getWidth() && hero.getX()<pipe.getCoordinates()[0]+ pipe.getWidth()){
+                if (hero.getY()- hero.getVy()*dt<pipe.getY()+pipe.getHeight() && hero.getY()>=pipe.getY()-hero.getHeight() && hero.getX()>pipe.getX()-hero.getWidth() && hero.getX()<pipe.getX()+ pipe.getWidth()){
                     hero.setVy(0);
                 }
-                if (hero.getY()+hero.getHeight()>pipe.getCoordinates()[1] && hero.getY()<pipe.getCoordinates()[1]+pipe.getHeight() && hero.getX()+ hero.getWidth()+hero.getVx()*dt>pipe.getCoordinates()[0] && hero.getX()<pipe.getCoordinates()[0]){
+                if (hero.getY()+hero.getHeight()>pipe.getY() && hero.getY()<pipe.getY()+pipe.getHeight() && hero.getX()+ hero.getWidth()+hero.getVx()*dt>pipe.getX() && hero.getX()<pipe.getX()){
                     hero.setVx(0);
                 }
-                if (hero.getY()+hero.getHeight()>pipe.getCoordinates()[1] && hero.getY()<pipe.getCoordinates()[1]+pipe.getHeight() && hero.getX()+hero.getVx()*dt<pipe.getCoordinates()[0]+ pipe.getWidth() && hero.getX()+ hero.getWidth()>pipe.getCoordinates()[0]+pipe.getWidth()){
+                if (hero.getY()+hero.getHeight()>pipe.getY() && hero.getY()<pipe.getY()+pipe.getHeight() && hero.getX()+hero.getVx()*dt<pipe.getX()+ pipe.getWidth() && hero.getX()+ hero.getWidth()>pipe.getX()+pipe.getWidth()){
                     hero.setVx(0);
                 }
             }
 
             // Handling the physics of floors
-            for (Floor floor : level.getFloors()){
-                if (hero.getY()-hero.getVy()*dt>=floor.getCoordinates()[1]-hero.getHeight() && hero.getX()>floor.getCoordinates()[0]-hero.getWidth() && hero.getX()<floor.getCoordinates()[0]+ floor.getWidth()) {
+            int N = 0;
+            for (Floor floor : level.getActivePart().getFloors()){
+                if (hero.getY()-hero.getVy()*dt>=floor.getY()-hero.getHeight() && hero.getX()>floor.getX()-hero.getWidth() && hero.getX()<floor.getX()+ floor.getWidth()) {
                     hero.setVy(0);
                     g=0;
                 }
                 else{
                     n++;
+                    N++;
                 }
-                if (hero.getY()+hero.getHeight()>floor.getCoordinates()[1] && hero.getY()<floor.getCoordinates()[1]+floor.getHeight() && hero.getX()+ hero.getWidth()+hero.getVx()*dt>floor.getCoordinates()[0] && hero.getX()<floor.getCoordinates()[0]){
+                if (hero.getY()+hero.getHeight()>floor.getY() && hero.getY()<floor.getY()+floor.getHeight() && hero.getX()+ hero.getWidth()+hero.getVx()*dt>floor.getX() && hero.getX()<floor.getX()){
                     hero.setVx(0);
                 }
-                if (hero.getY()+hero.getHeight()>floor.getCoordinates()[1] && hero.getY()<floor.getCoordinates()[1]+floor.getHeight() && hero.getX()+hero.getVx()*dt<floor.getCoordinates()[0]+ floor.getWidth() && hero.getX()+ hero.getWidth()>floor.getCoordinates()[0]+floor.getWidth()){
+                if (hero.getY()+hero.getHeight()>floor.getY() && hero.getY()<floor.getY()+floor.getHeight() && hero.getX()+hero.getVx()*dt<floor.getX()+ floor.getWidth() && hero.getX()+ hero.getWidth()>floor.getX()+floor.getWidth()){
                     hero.setVx(0);
                 }
             }
+            if (N==this.level.getActivePart().getFloors().length && hero.getY()+hero.getHeight()/2>this.level.getActivePart().getFloors()[0].getY()){
+                if (hero.getLives()>=2){
+                    hero.setLives(hero.getLives()-1);
+                    hero.setCoordinates(new double[]{150,200});
+                }
+                else{
+                    // TODO
+                }
+            }
             hero.addY(-hero.getVy()*dt);
-            if (n==level.getFloors().length+level.getBlocks().length+level.getPipes().length){
+            if (n== level.getActivePart().getFloors().length+ level.getActivePart().getBlocks().length+ level.getActivePart().getPipes().length){
                 g = -5;
             }
             if (hero.getX()+ hero.getVx()*dt>150) hero.addX(hero.getVx()*dt);
@@ -81,32 +106,36 @@ public class PhysicsHandler {
         }
         updateCoins();
         updatePlants();
+        updateActivePart();
     }
     public void jump(){
-        if (level.getHeroes()[0].getVy()==0){
-            level.getHeroes()[0].setVy(45);
+        if (level.getActivePart().getHeroes()[0].getVy()==0){
+            level.getActivePart().getHeroes()[0].setVy(45);
         }
     }
     public void right(){
-        level.getHeroes()[0].setVx(40);
+        level.getActivePart().getHeroes()[0].setVx(40);
     }
     public void stop(){
-        level.getHeroes()[0].setVx(0);
+        level.getActivePart().getHeroes()[0].setVx(0);
     }
     public void left(){
-        level.getHeroes()[0].setVx(-40);
+        level.getActivePart().getHeroes()[0].setVx(-40);
     }
 
     public void updateCoins(){
-        for (int i=0 ; i<level.getCoins().length ; i++){
-            if (level.getCoins()[i].getCoordinates()[0]+level.getCoins()[i].getWidth()>level.getHeroes()[0].getCoordinates()[0] && level.getCoins()[i].getCoordinates()[0]<level.getHeroes()[0].getCoordinates()[0]+level.getHeroes()[0].getWidth() && level.getCoins()[i].getCoordinates()[1]+level.getCoins()[i].getHeight()>level.getHeroes()[0].getCoordinates()[1] && level.getCoins()[i].getCoordinates()[1]<level.getHeroes()[0].getCoordinates()[1]+level.getHeroes()[0].getHeight()){
-                level.getCoins()[i].setVisible(false);
+        for (Hero hero : this.level.getActivePart().getHeroes()){
+            for (int i = 0; i< level.getActivePart().getCoins().length ; i++){
+                if (level.getActivePart().getCoins()[i].isVisible() && level.getActivePart().getCoins()[i].getX()+ level.getActivePart().getCoins()[i].getWidth()> hero.getX() && level.getActivePart().getCoins()[i].getX()< hero.getX()+ hero.getWidth() && level.getActivePart().getCoins()[i].getY()+ level.getActivePart().getCoins()[i].getHeight()> level.getActivePart().getHeroes()[0].getY() && level.getActivePart().getCoins()[i].getY()< level.getActivePart().getHeroes()[0].getY()+ level.getActivePart().getHeroes()[0].getHeight()){
+                    level.getActivePart().getCoins()[i].setVisible(false);
+                    hero.addCoin();
+                }
             }
         }
     }
 
     public void updatePlants(){
-        for (Enemy enemy : level.getEnemies()){
+        for (Enemy enemy : level.getActivePart().getEnemies()){
             if (enemy instanceof Plant){
                 if (((Plant) enemy).getStopwatch().passedTime()> ((Plant) enemy).getTimePeriod()){
                     ((Plant) enemy).getStopwatch().start();
@@ -119,5 +148,16 @@ public class PhysicsHandler {
                 }
             }
         }
+    }
+    public void updateActivePart(){
+       if (this.level.getActivePart().getHeroes()[0].getX()>5019 && this.level.getActivePart().getHeroes()[0].getY()>this.level.getActivePart().getEndY()[0] && this.level.getActivePart().getHeroes()[0].getY()+this.level.getActivePart().getHeroes()[0].getHeight()/2<this.level.getActivePart().getEndY()[1]){
+           if (this.level.getActivePart().getId()==this.level.getParts().length-1){
+               // TODO
+           }
+           else{
+               this.level.setActivePart(this.level.getParts()[this.level.getActivePart().getId()+1]);
+               this.level.getActivePart().getHeroes()[0].setCoordinates(new double[]{150,200});
+           }
+       }
     }
 }
