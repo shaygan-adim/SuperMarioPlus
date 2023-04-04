@@ -9,14 +9,17 @@ import java.util.List;
 
 public class User {
     // Fields
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
     private int coin = 0;
     private int highscore = 0;
-    private Level[] levels;
+    private int lastScore;
+    private PartName[] partNames = new PartName[3];
+    private int[] partScore = new int[3];
+    private int[] partHeart = new int[3];
     private HeroName[] ownedHeroes = new HeroName[]{HeroName.MARIO};
     private HeroName activeHero = HeroName.MARIO;
-
+    private int activeSlot;
 
     // Constructor
     public User(String username, String password){
@@ -59,14 +62,28 @@ public class User {
     public String getPassword() {return password;}
     public int getCoin() {return coin;}
     public int getHighscore() {return highscore;}
-    public Level[] getLevels() {return levels;}
+    public PartName[] getPartNames() {return partNames;}
+    public int[] getPartScore() {return partScore;}
+    public int[] getPartHeart() {return partHeart;}
     public HeroName[] getOwnedHeroes() {return ownedHeroes;}
     public HeroName getActiveHero() {return activeHero;}
+    public int getLastScore() {return lastScore;}
+    public int getActiveSlot() {return activeSlot;}
 
     // Setters
     public void setCoin(int coin) {this.coin = coin;}
     public void setHighscore(int highscore) {this.highscore = highscore;}
-    public void setLevels(Part[] parts) {this.levels = levels;}
+    public void setPart1(PartName partName) {this.partNames[0] = partName;}
+    public void setPart2(PartName partName) {this.partNames[1] = partName;}
+    public void setPart3(PartName partName) {this.partNames[2] = partName;}
+    public void setPartScore1(int a){this.partScore[0] = a;}
+    public void setPartScore2(int a){this.partScore[1] = a;}
+    public void setPartScore3(int a){this.partScore[2] = a;}
+    public void setPartHeart1(int a){this.partHeart[0] = a;}
+    public void setPartHeart2(int a){this.partHeart[1] = a;}
+    public void setPartHeart3(int a){this.partHeart[2] = a;}
     public void setOwnedHeroes(HeroName[] ownedHeroes) {this.ownedHeroes = ownedHeroes;}
     public void setActiveHero(HeroName activeHero) {this.activeHero = activeHero;}
+    public void setLastScore(int lastScore) {this.lastScore = lastScore;}
+    public void setActiveSlot(int activeSlot) {this.activeSlot = activeSlot;}
 }

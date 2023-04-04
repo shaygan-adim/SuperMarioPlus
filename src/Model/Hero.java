@@ -1,6 +1,6 @@
 package Model;
 
-public class Hero extends Character{
+abstract public class Hero extends Character{
     // Fields
     private int score = 0;
     private int coin = 0;
@@ -17,6 +17,9 @@ public class Hero extends Character{
     public void removeCoin(int n){this.coin-=n;}
     public void emptyCoin(){this.coin = 0;}
     public void addScore(int n){this.score+=n;}
+
+    // Setters
+    public void setScore(int score) {this.score = score;}
 
     // Getters
     public int getScore() {return score;}

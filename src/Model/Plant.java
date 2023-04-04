@@ -2,7 +2,7 @@ package Model;
 
 public class Plant extends Enemy{
     // Fields
-    private Pipe pipe;
+    transient private Pipe pipe;
     private final Stopwatch stopwatch = new Stopwatch(1);
     private boolean visible;
     private final int timePeriod;

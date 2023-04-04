@@ -24,6 +24,7 @@ abstract public class ImageLoader {
     private static ImageIcon coinBiggerImage;
     private static Image coinInGameImage;
     private static ImageIcon heartImage;
+    private static ImageIcon scoreImage;
     private static ImageIcon marioImage;
     private static ImageIcon marioSmallImage;
 
@@ -51,6 +52,7 @@ abstract public class ImageLoader {
         ImageLoader.coinBiggerImage = new ImageIcon("src/Loading/Graphics/Other/CoinBigger.png");
         ImageLoader.coinInGameImage = ImageIO.read(new File("src/Loading/Graphics/Other/CoinInGAme.png"));
         ImageLoader.heartImage = new ImageIcon("src/Loading/Graphics/Other/Heart.png");
+        ImageLoader.scoreImage = new ImageIcon("src/Loading/Graphics/Other/Score.png");
         ImageLoader.marioImage = new ImageIcon("src/Loading/Graphics/Characters/Mario/Mario.png");
         ImageLoader.marioSmallImage = new ImageIcon("src/Loading/Graphics/Characters/Mario/MarioSmall.png");
         ImageLoader.icon = new ImageIcon("src/Loading/Graphics/Other/icon.png");
@@ -72,6 +74,7 @@ abstract public class ImageLoader {
     public static ImageIcon getCoinBiggerImage() {return coinBiggerImage;}
     public static Image getCoinInGameImage() {return coinInGameImage;}
     public static ImageIcon getHeartImage() {return heartImage;}
+    public static ImageIcon getScoreImage() {return scoreImage;}
     public static ImageIcon getMarioImage() {return marioImage;}
     public static ImageIcon getMarioSmallImage() {return marioSmallImage;}
     public static ImageIcon getIcon() {return icon;}

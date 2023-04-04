@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class MainPage extends MainFrame{
     // Fields
@@ -57,6 +56,13 @@ public class MainPage extends MainFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ProfilePage(user);
+                MainPage.super.dispose();
+            }
+        });
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SlotMenu(user);
                 MainPage.super.dispose();
             }
         });

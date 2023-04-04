@@ -11,18 +11,21 @@ public class AnimationPanel extends JPanel {
     private final GameLoop gameLoop;
     private final PhysicsHandler physicsHandler;
     private final Level level;
+    private final Game game;
     private final Image[] standingHero;
     private final Image[] toRightHero;
     private final Image[] toLeftHero;
     private final Image[] levelImage;
-    private  final JLabel coinLabel,heartLabel;
+    private final JLabel coinLabel,heartLabel,scoreLabel;
 
     // Constructor
-    public AnimationPanel(Level level, Image[] levelImage, PhysicsHandler physicsHandler,JLabel coinLabel,JLabel heartLabel){
+    public AnimationPanel(Level level, Image[] levelImage, PhysicsHandler physicsHandler,JLabel coinLabel,JLabel heartLabel,JLabel scoreLabel,Game game){
         this.level = level;
         this.physicsHandler = physicsHandler;
         this.coinLabel = coinLabel;
         this.heartLabel = heartLabel;
+        this.scoreLabel = scoreLabel;
+        this.game = game;
 
         // Loading heroes' images
         Image[] standingHero = new Image[level.getActivePart().getHeroes().length];
@@ -53,6 +56,7 @@ public class AnimationPanel extends JPanel {
         // Updating the labels
         this.coinLabel.setText(String.valueOf(this.level.getActivePart().getHeroes()[0].getCoin()));
         this.heartLabel.setText(String.valueOf(this.level.getActivePart().getHeroes()[0].getLives()));
+        this.scoreLabel.setText(String.valueOf(this.level.getActivePart().getHeroes()[0].getScore()));
 
         // Drawing the background
         if (level.getActivePart().getHeroes()[0].getX()<4002){
@@ -114,6 +118,9 @@ public class AnimationPanel extends JPanel {
                 }
             }
             i++;
+        }
+        if (this.level.isDone()){
+            game.finishGame();
         }
     }
     void startTheAnimation() {gameLoop.start();}

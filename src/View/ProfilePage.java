@@ -76,7 +76,7 @@ public class ProfilePage extends MainFrame{
         super.mainPanel.add(logoutButton);
 
         usernameLabel.setBounds(140,0,400,100);
-        highscoreLabel.setBounds(140,70,150,50);
+        highscoreLabel.setBounds(140,70,300,50);
         coinImage.setBounds(110,90,100,100);
         coinLabel.setBounds(195,120,150,50);
         characterLabel.setBounds(200,170,150,55);

@@ -12,6 +12,7 @@ public class Part {
     private final Hero[] heroes;
     private final Coin[] coins;
     private final int[] endY;
+    private int finalScore = 0;
 
     // Constructor
     public Part(int id,Block[] blocks, Floor[] floors, Pipe[] pipes, Enemy[] enemies, Hero[] heroes, int coinsNumber,int[] endY) {
@@ -32,6 +33,7 @@ public class Part {
             int y = -1;
             boolean goodRandom = false;
             while (!goodRandom){
+                System.out.println("FUCK");
                 goodRandom = true;
                 x = random.nextInt(200,5000);
                 y = random.nextInt(30,650);
@@ -87,6 +89,9 @@ public class Part {
         }
     }
 
+    // Setters
+    public void setFinalScore(int finalScore) {this.finalScore = finalScore;}
+
     // Getters
     public int getId() {return id;}
     public Block[] getBlocks() {return blocks;}
@@ -96,4 +101,5 @@ public class Part {
     public Hero[] getHeroes() {return heroes;}
     public Coin[] getCoins() {return coins;}
     public int[] getEndY() {return endY;}
+    public int getFinalScore() {return finalScore;}
 }

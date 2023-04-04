@@ -1,14 +1,18 @@
 package Model;
 
+import java.io.IOException;
+
 public class PhysicsHandler {
     // Fields
     private final Level level;
+    private final User user;
     private static int g = -5;
     private static final double dt = 0.1D;
 
     // Constructor
-    public PhysicsHandler(Level level){
+    public PhysicsHandler(Level level, User user){
         this.level = level;
+        this.user = user;
     }
 
     // Methods
@@ -28,7 +32,11 @@ public class PhysicsHandler {
                 if (hero.getY()- hero.getVy()*dt<block.getY()+block.getHeight() && hero.getY()>=block.getY()-hero.getHeight() && hero.getX()>block.getX()-hero.getWidth() && hero.getX()<block.getX()+ block.getWidth()){
                     hero.setVy(0);
                     if (block.getItemInside() instanceof Coin){
-                        hero.addCoin();
+                        if (((Coin) block.getItemInside()).isVisible()){
+                            hero.addCoin();
+                            hero.addScore(100);
+                            ((Coin) block.getItemInside()).setVisible(false);
+                        }
                     }
                 }
                 if (hero.getY()+hero.getHeight()>block.getY() && hero.getY()<block.getY()+block.getHeight() && hero.getX()+ hero.getWidth()+hero.getVx()*dt>block.getX() && hero.getX()<block.getX()){
@@ -49,6 +57,20 @@ public class PhysicsHandler {
                             if (hero.getLives()>=2){
                                 hero.setLives(hero.getLives()-1);
                                 hero.setCoordinates(new double[]{150,200});
+                                for (Coin coin : this.level.getActivePart().getCoins()){
+                                    coin.setVisible(true);
+                                }
+                                for (Block block : this.level.getActivePart().getBlocks()){
+                                    if (block.getItemInside() instanceof Coin){
+                                        ((Coin) block.getItemInside()).setVisible(true);
+                                    }
+                                }
+                                if (this.level.getActivePart().getId()==0){
+                                    this.level.getActivePart().getHeroes()[0].setScore(0);
+                                }
+                                else{
+                                    this.level.getActivePart().getHeroes()[0].setScore(this.level.getParts()[this.level.getActivePart().getId()-1].getFinalScore());
+                                }
                             }
                             else{
                                 // TODO
@@ -92,6 +114,20 @@ public class PhysicsHandler {
                 if (hero.getLives()>=2){
                     hero.setLives(hero.getLives()-1);
                     hero.setCoordinates(new double[]{150,200});
+                    for (Coin coin : this.level.getActivePart().getCoins()){
+                        coin.setVisible(true);
+                    }
+                    for (Block block : this.level.getActivePart().getBlocks()){
+                        if (block.getItemInside() instanceof Coin){
+                            ((Coin) block.getItemInside()).setVisible(true);
+                        }
+                    }
+                    if (this.level.getActivePart().getId()==0){
+                        this.level.getActivePart().getHeroes()[0].setScore(0);
+                    }
+                    else{
+                        this.level.getActivePart().getHeroes()[0].setScore(this.level.getParts()[this.level.getActivePart().getId()-1].getFinalScore());
+                    }
                 }
                 else{
                     // TODO
@@ -152,9 +188,46 @@ public class PhysicsHandler {
     public void updateActivePart(){
        if (this.level.getActivePart().getHeroes()[0].getX()>5019 && this.level.getActivePart().getHeroes()[0].getY()>this.level.getActivePart().getEndY()[0] && this.level.getActivePart().getHeroes()[0].getY()+this.level.getActivePart().getHeroes()[0].getHeight()/2<this.level.getActivePart().getEndY()[1]){
            if (this.level.getActivePart().getId()==this.level.getParts().length-1){
-               // TODO
+               this.user.setCoin(this.user.getCoin()+this.level.getActivePart().getHeroes()[0].getCoin());
+               if (this.user.getHighscore()<this.level.getActivePart().getHeroes()[0].getScore()){
+                   this.user.setHighscore(this.level.getActivePart().getHeroes()[0].getScore());
+               }
+               try {
+                   this.user.save();
+               } catch (IOException e) {}
+               if (user.getActiveSlot()==1){
+                   user.setPart1(null);
+               }
+               if (user.getActiveSlot()==2){
+                   user.setPart2(null);
+               }
+               if (user.getActiveSlot()==3){
+                   user.setPart3(null);
+               }
+               this.level.setDone(true);
            }
            else{
+               this.user.setCoin(this.user.getCoin()+this.level.getActivePart().getHeroes()[0].getCoin());
+               if (this.user.getActiveSlot()==1){
+                   this.user.setPart1(PartName.L1P2);
+                   this.user.setPartScore1(this.level.getActivePart().getHeroes()[0].getScore());
+                   this.user.setPartHeart1(this.level.getActivePart().getHeroes()[0].getLives());
+               }
+               if (this.user.getActiveSlot()==2){
+                   this.user.setPart2(PartName.L1P2);
+                   this.user.setPartScore2(this.level.getActivePart().getHeroes()[0].getScore());
+                   this.user.setPartHeart2(this.level.getActivePart().getHeroes()[0].getLives());
+               }
+               if (this.user.getActiveSlot()==3){
+                   this.user.setPart3(PartName.L1P2);
+                   this.user.setPartScore3(this.level.getActivePart().getHeroes()[0].getScore());
+                   this.user.setPartHeart3(this.level.getActivePart().getHeroes()[0].getLives());
+               }
+               this.level.getActivePart().getHeroes()[0].emptyCoin();
+               this.level.getActivePart().setFinalScore(this.level.getActivePart().getHeroes()[0].getScore());
+               try {
+                   this.user.save();
+               } catch (IOException e) {}
                this.level.setActivePart(this.level.getParts()[this.level.getActivePart().getId()+1]);
                this.level.getActivePart().getHeroes()[0].setCoordinates(new double[]{150,200});
            }
