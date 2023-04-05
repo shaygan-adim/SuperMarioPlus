@@ -6,7 +6,10 @@ import Loading.LevelLoader;
 import Model.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Game extends JFrame {
@@ -16,6 +19,8 @@ public class Game extends JFrame {
     private final User user;
     private final Controller controller;
     private final PhysicsHandler physicsHandler;
+    private JLabel coinImage,coinLabel,heartImage,heartLabel,scoreImage,scoreLabel,timeImage,timeLabel,levelLabel,summaryLabel;
+    private JButton homeButton, playAgainButton,nextLevelButton;
 
     //  Constructor
     public Game(Level level, User user){
@@ -40,19 +45,62 @@ public class Game extends JFrame {
         this.setVisible(true);
 
         // Creating and configuring components
-        JLabel coinImage = new JLabel(ImageLoader.getCoinBiggerImage());
-        JLabel coinLabel = new JLabel("0");
-        JLabel heartImage = new JLabel(ImageLoader.getHeartImage());
-        JLabel heartLabel = new JLabel(String.valueOf(this.level.getActivePart().getHeroes()[0].getLives()));
-        JLabel scoreImage = new JLabel(ImageLoader.getScoreImage());
-        JLabel scoreLabel = new JLabel("0");
+        coinImage = new JLabel(ImageLoader.getCoinBiggerImage());
+        coinLabel = new JLabel("0");
+        heartImage = new JLabel(ImageLoader.getHeartImage());
+        heartLabel = new JLabel(String.valueOf(this.level.getActivePart().getHeroes()[0].getLives()));
+        scoreImage = new JLabel(ImageLoader.getScoreImage());
+        scoreLabel = new JLabel("0");
+        timeImage = new JLabel(ImageLoader.getTimeImage());
+        timeLabel = new JLabel(String.valueOf(this.level.getActivePart().getTime()));
+        levelLabel = new JLabel("World "+(this.level.getId()+1)+"-"+(this.level.getActivePart().getId()+1));
+        summaryLabel = new JLabel("Summary :");
+        homeButton = new JButton("Home");
+        playAgainButton = new JButton("Play again");
+        nextLevelButton = new JButton("Next level");
 
         coinLabel.setFont(new Font("Forte",Font.PLAIN,35));
         heartLabel.setFont(new Font("Forte",Font.PLAIN,35));
         scoreLabel.setFont(new Font("Forte",Font.PLAIN,35));
+        timeLabel.setFont(new Font("Forte",Font.PLAIN,35));
+        levelLabel.setFont(new Font("Ink Free",Font.BOLD,40));
+        summaryLabel.setFont(new Font("Forte",Font.PLAIN,40));
+        playAgainButton.setFont(new Font("Forte",Font.PLAIN,16));
+        homeButton.setFont(new Font("Forte",Font.PLAIN,16));
+        nextLevelButton.setFont(new Font("Forte",Font.PLAIN,16));
+
+        coinLabel.setForeground(Color.BLACK);
+        heartLabel.setForeground(Color.BLACK);
+        scoreLabel.setForeground(Color.BLACK);
+        timeLabel.setForeground(Color.BLACK);
+        levelLabel.setForeground(Color.BLACK);
+        summaryLabel.setForeground(Color.BLACK);
+
+        summaryLabel.setVisible(false);
+        homeButton.setVisible(false);
+        nextLevelButton.setVisible(false);
+        playAgainButton.setVisible(false);
+
+        // Setting listeners
+        homeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainPage(user);
+                Game.super.dispose();
+            }
+        });
+        playAgainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SlotMenu(user);
+                Game.super.dispose();
+
+
+            }
+        });
 
         // Setting main panel up
-        this.mainPanel = new AnimationPanel(this.level, new Image[]{ImageLoader.getL1P1Image(),ImageLoader.getL1P2Image()},this.physicsHandler,coinLabel,heartLabel,scoreLabel,this);
+        this.mainPanel = new AnimationPanel(this.level, new Image[]{ImageLoader.getL1P1Image(),ImageLoader.getL1P2Image()},this.physicsHandler,this);
         this.mainPanel.setLayout(null);
         this.setContentPane(this.mainPanel);
 
@@ -63,15 +111,25 @@ public class Game extends JFrame {
         this.mainPanel.add(heartLabel);
         this.mainPanel.add(scoreLabel);
         this.mainPanel.add(scoreImage);
+        this.mainPanel.add(timeLabel);
+        this.mainPanel.add(timeImage);
+        this.mainPanel.add(levelLabel);
+        this.mainPanel.add(summaryLabel);
+        this.mainPanel.add(homeButton);
+        this.mainPanel.add(nextLevelButton);
+        this.mainPanel.add(playAgainButton);
 
         // Setting components' locations
-        coinImage.setBounds(0,0,100,100);
-        coinLabel.setBounds(85,30,150,50);
-        heartImage.setBounds(105,0,100,100);
-        heartLabel.setBounds(190,30,150,50);
+        heartImage.setBounds(0,0,100,100);
+        heartLabel.setBounds(85,30,150,50);
+        coinImage.setBounds(95,0,100,100);
+        coinLabel.setBounds(180,30,150,50);
         scoreImage.setBounds(200,0,100,100);
         scoreLabel.setBounds(285,30,150,50);
-
+        timeImage.setBounds(1100,0,100,100);
+        timeLabel.setBounds(1185,30,150,50);
+        levelLabel.setBounds(580,30,200,50);
+        summaryLabel.setBounds(50,100,100,50);
     }
     void initAnimation(){
         this.mainPanel.startTheAnimation();
@@ -80,30 +138,21 @@ public class Game extends JFrame {
                 ((Plant) enemy).getStopwatch().start();
             }
         }
-    }
-    void finishGame(){
-        new MainPage(this.user);
-        Game.super.dispose();
+        this.level.getActivePart().getStopwatch().start();
     }
 
-    public static void main(String[] args) throws IOException {
-        Hero[] heroes = new Hero[]{new Mario(3)};
-        Level level1 = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)});
-//        Gson gson = new Gson();
-//        // Convert the JSON string to a list of objects
-//        String jsonString = gson.toJson(level1);
-//        try (FileWriter fileWriter = new FileWriter("src/Test.json")) {
-//            fileWriter.write(jsonString);
-//        }
-//        try (FileReader fileReader = new FileReader("src/Test.json")) {
-//            // Convert the JSON string to a list of objects
-//            Level level2 = gson.fromJson(fileReader, Level.class);
-//        }
-        System.out.println("SAG");
-        User user1 = new User("SABZ","SARD");
-        System.out.println(user1.getCoin()+" "+ user1.getHighscore());
-        new Game(level1,user1);
-        System.out.println(user1.getCoin()+" "+ user1.getHighscore());
-    }
-
+    // Getters
+    public JLabel getCoinImage() {return coinImage;}
+    public JLabel getCoinLabel() {return coinLabel;}
+    public JLabel getHeartImage() {return heartImage;}
+    public JLabel getHeartLabel() {return heartLabel;}
+    public JLabel getScoreImage() {return scoreImage;}
+    public JLabel getScoreLabel() {return scoreLabel;}
+    public JLabel getTimeImage() {return timeImage;}
+    public JLabel getTimeLabel() {return timeLabel;}
+    public JLabel getLevelLabel() {return levelLabel;}
+    public JLabel getSummaryLabel() {return summaryLabel;}
+    public JButton getHomeButton() {return homeButton;}
+    public JButton getPlayAgainButton() {return playAgainButton;}
+    public JButton getNextLevelButton() {return nextLevelButton;}
 }

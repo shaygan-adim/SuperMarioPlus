@@ -12,10 +12,12 @@ public class Part {
     private final Hero[] heroes;
     private final Coin[] coins;
     private final int[] endY;
+    private final int time;
+    private final Stopwatch stopwatch = new Stopwatch(1);
     private int finalScore = 0;
 
     // Constructor
-    public Part(int id,Block[] blocks, Floor[] floors, Pipe[] pipes, Enemy[] enemies, Hero[] heroes, int coinsNumber,int[] endY) {
+    public Part(int id,Block[] blocks, Floor[] floors, Pipe[] pipes, Enemy[] enemies, Hero[] heroes, int coinsNumber,int[] endY,int time) {
         this.id = id;
         this.blocks = blocks;
         this.floors = floors;
@@ -23,6 +25,7 @@ public class Part {
         this.enemies = enemies;
         this.heroes = heroes;
         this.endY = endY;
+        this.time = time;
 
         // Putting coins in the world randomly
         this.coins = new Coin[coinsNumber];
@@ -33,10 +36,9 @@ public class Part {
             int y = -1;
             boolean goodRandom = false;
             while (!goodRandom){
-                System.out.println("FUCK");
                 goodRandom = true;
                 x = random.nextInt(200,5000);
-                y = random.nextInt(30,650);
+                y = random.nextInt(30,600);
                 for (Block block : this.blocks){
                     if (x+this.coins[i].getWidth()>block.getCoordinates()[0] && x<block.getCoordinates()[0]+block.getWidth() && y+this.coins[i].getHeight()>block.getCoordinates()[1] && y<block.getCoordinates()[1]+block.getHeight()){
                         goodRandom = false;
@@ -62,7 +64,6 @@ public class Part {
                 if (goodRandom){
                     boolean flag = true;
                     while (flag){
-                        y++;
                         for (Block block : this.blocks){
                             if (y+this.coins[i].getHeight()==block.getCoordinates()[1] && x+this.coins[i].getWidth()>block.getCoordinates()[0] && x<block.getCoordinates()[0]+block.getWidth()){
                                 flag = false;
@@ -81,6 +82,7 @@ public class Part {
                                 break;
                             }
                         }
+                        y++;
                     }
                 }
             }
@@ -102,4 +104,6 @@ public class Part {
     public Coin[] getCoins() {return coins;}
     public int[] getEndY() {return endY;}
     public int getFinalScore() {return finalScore;}
+    public Stopwatch getStopwatch() {return stopwatch;}
+    public int getTime() {return time;}
 }

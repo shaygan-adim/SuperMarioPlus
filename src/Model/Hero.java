@@ -4,6 +4,7 @@ abstract public class Hero extends Character{
     // Fields
     private int score = 0;
     private int coin = 0;
+    private boolean standingOnSomething = false;
 
     // Constructor
     public Hero(int lives, int height, int width) {
@@ -20,8 +21,10 @@ abstract public class Hero extends Character{
 
     // Setters
     public void setScore(int score) {this.score = score;}
+    public void setStandingOnSomething(boolean standingOnSomething) {this.standingOnSomething = standingOnSomething;}
 
     // Getters
     public int getScore() {return score;}
     public int getCoin() {return coin;}
+    public boolean isStandingOnSomething() {return standingOnSomething;}
 }

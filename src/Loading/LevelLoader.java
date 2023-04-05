@@ -15,9 +15,10 @@ abstract public class LevelLoader {
         try {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-            objects = new Object[6];
+            objects = new Object[7];
             String line;
             String[] splitedLine;
+            int time = Integer.valueOf(br.readLine());
             int coinsNumber = Integer.valueOf(br.readLine());
             String[] info = br.readLine().split(" ");
             int[] endY = new int[]{Integer.valueOf(info[0]),Integer.valueOf(info[1])};
@@ -65,6 +66,7 @@ abstract public class LevelLoader {
             objects[3] = enemyList.toArray(new Enemy[0]);
             objects[4] = Integer.valueOf(coinsNumber);
             objects[5] = endY;
+            objects[6] = Integer.valueOf(time);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,11 +75,11 @@ abstract public class LevelLoader {
     public static Part newL1P1 (Hero[] heroes){
         File file = new File("src/Loading/Levels/L1P1.txt");
         Object[] objects = readFile(file);
-        return new Part(0,(Block[]) objects[0],(Floor[]) objects[1],(Pipe[]) objects[2],(Enemy[]) objects[3],heroes,(Integer) objects[4],(int[]) objects[5]);
+        return new Part(0,(Block[]) objects[0],(Floor[]) objects[1],(Pipe[]) objects[2],(Enemy[]) objects[3],heroes,(Integer) objects[4],(int[]) objects[5],(Integer) objects[6]);
     }
     public static Part newL1P2 (Hero[] heroes){
         File file = new File("src/Loading/Levels/L1P2.txt");
         Object[] objects = readFile(file);
-        return new Part(1,(Block[]) objects[0],(Floor[]) objects[1],(Pipe[]) objects[2],(Enemy[]) objects[3],heroes,(Integer) objects[4],(int[]) objects[5]);
+        return new Part(1,(Block[]) objects[0],(Floor[]) objects[1],(Pipe[]) objects[2],(Enemy[]) objects[3],heroes,(Integer) objects[4],(int[]) objects[5],(Integer) objects[6]);
     }
 }

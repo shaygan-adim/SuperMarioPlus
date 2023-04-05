@@ -2,22 +2,37 @@ package Model;
 
 public class Level {
     // Fields
+    private final int id;
     private final Part[] parts;
+    private int totalCoins = 0;
+    private int totalTime = 0;
     private Part activePart;
-    private boolean done = false;
+    private int done = 0;
 
     // Constructor
-    public Level(Part[] parts){
+    public Level(Part[] parts,int id){
+        this.id=id;
         this.parts = parts;
         this.activePart = parts[0];
     }
 
+    // Methods
+    public void addCoin(int n){
+        this.totalCoins+=n;
+    }
+    public void addTime(int n){
+        this.totalTime+=n;
+    }
+
     // Setters
     public void setActivePart(Part activePart) {this.activePart = activePart;}
-    public void setDone(boolean done) {this.done = done;}
+    public void setDone(int done) {this.done = done;}
 
     // Getters
+    public int getId() {return id;}
     public Part[] getParts() {return parts;}
     public Part getActivePart() {return activePart;}
-    public boolean isDone() {return done;}
+    public int getDone() {return done;}
+    public int getTotalCoins() {return totalCoins;}
+    public int getTotalTime() {return totalTime;}
 }
