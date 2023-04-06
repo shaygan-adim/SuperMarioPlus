@@ -107,6 +107,9 @@ public class SlotMenu extends MainFrame{
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(3);
                 }
+                if (user.getActiveHero()==HeroName.LUIGI){
+                    heroes[0] = new Luigi(3);
+                }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 user.setActiveSlot(1);
                 user.setPart1(null);
@@ -123,6 +126,10 @@ public class SlotMenu extends MainFrame{
                 Hero[] heroes = new Hero[1];
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(user.getPartHeart()[0]);
+                    heroes[0].setScore(user.getPartScore()[0]);
+                }
+                if (user.getActiveHero()==HeroName.LUIGI){
+                    heroes[0] = new Luigi(user.getPartHeart()[0]);
                     heroes[0].setScore(user.getPartScore()[0]);
                 }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
@@ -144,6 +151,9 @@ public class SlotMenu extends MainFrame{
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(3);
                 }
+                if (user.getActiveHero()==HeroName.LUIGI){
+                    heroes[0] = new Luigi(3);
+                }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 user.setActiveSlot(2);
                 user.setPart2(null);
@@ -160,6 +170,10 @@ public class SlotMenu extends MainFrame{
                 Hero[] heroes = new Hero[1];
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(user.getPartHeart()[1]);
+                    heroes[0].setScore(user.getPartScore()[1]);
+                }
+                if (user.getActiveHero()==HeroName.LUIGI){
+                    heroes[0] = new Luigi(user.getPartHeart()[1]);
                     heroes[0].setScore(user.getPartScore()[1]);
                 }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
@@ -181,6 +195,9 @@ public class SlotMenu extends MainFrame{
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(3);
                 }
+                if (user.getActiveHero()==HeroName.LUIGI){
+                    heroes[0] = new Luigi(3);
+                }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 user.setActiveSlot(3);
                 user.setPart3(null);
@@ -197,6 +214,10 @@ public class SlotMenu extends MainFrame{
                 Hero[] heroes = new Hero[1];
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(user.getPartHeart()[2]);
+                    heroes[0].setScore(user.getPartScore()[2]);
+                }
+                if (user.getActiveHero()==HeroName.LUIGI){
+                    heroes[0] = new Luigi(user.getPartHeart()[2]);
                     heroes[0].setScore(user.getPartScore()[2]);
                 }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);

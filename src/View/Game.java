@@ -59,6 +59,10 @@ public class Game extends JFrame {
         playAgainButton = new JButton("Play again");
         nextLevelButton = new JButton("Next level");
 
+        homeButton.setFocusPainted(false);
+        playAgainButton.setFocusPainted(false);
+        nextLevelButton.setFocusPainted(false);
+
         coinLabel.setFont(new Font("Forte",Font.PLAIN,35));
         heartLabel.setFont(new Font("Forte",Font.PLAIN,35));
         scoreLabel.setFont(new Font("Forte",Font.PLAIN,35));

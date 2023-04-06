@@ -13,8 +13,6 @@ public class AnimationPanel extends JPanel {
     private final Level level;
     private final Game game;
     private final Image[] standingHero;
-    private final Image[] toRightHero;
-    private final Image[] toLeftHero;
     private final Image[] levelImage;
     private final JLabel coinLabel,heartLabel,scoreLabel,timeLabel,levelLabel,coinImage,heartImage,scoreImage,timeImage,summaryLabel;
     private final JButton nextLevelButton,playAgainButton,homeButton;
@@ -47,14 +45,13 @@ public class AnimationPanel extends JPanel {
         for (Hero hero : level.getActivePart().getHeroes()){
             if (hero instanceof Mario){
                 standingHero[i]=ImageLoader.getMarioInGameImage();
-                toRightHero[i]=null;
-                toLeftHero[i]=null;
+            }
+            if (hero instanceof Luigi){
+                standingHero[i]=ImageLoader.getLuigiInGameImage();
             }
             i++;
         }
         this.standingHero = standingHero;
-        this.toRightHero = toRightHero;
-        this.toLeftHero = toLeftHero;
         this.levelImage = levelImage;
         gameLoop = new GameLoop(this);
         setSize(new Dimension(1280,800));
@@ -111,83 +108,163 @@ public class AnimationPanel extends JPanel {
             // Drawing the heroes
             int i = 0;
             for (Hero hero : level.getActivePart().getHeroes()){
-                if (hero.getVy()==0 && !hero.isStandingOnSomething()){
+                if (hero.getVy()==0){
                     if (hero.getVx()==0){
-                        if (level.getActivePart().getHeroes()[0].getX()<4002){
-                            g.drawImage(standingHero[i],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                        }
-                        else{
-                            g.drawImage(standingHero[i],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                        }
-                    }
-                    else if (hero.getVx()>0){
-                        if (level.getActivePart().getHeroes()[0].getX()<4002){
-//                        g.drawImage(toRightHero[i],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                            if (hero instanceof Mario){
-                                g.drawImage(ImageLoader.getMarioRightImages()[((Mario) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                                if (iterator%Mario.getFrameDelay()==0){
-                                    ((Mario) hero).addFrame();
-                                }
-                            }
-                        }
-                        else{
-//                        g.drawImage(toRightHero[i],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                            if (hero instanceof Mario){
-                                g.drawImage(ImageLoader.getMarioRightImages()[((Mario) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                                if (iterator%Mario.getFrameDelay()==0){
-                                    ((Mario) hero).addFrame();
-                                }
-                            }
-                        }
-                    }
-                    else{
-                        if (level.getActivePart().getHeroes()[0].getX()<4002){
-//                        g.drawImage(toLeftHero[i],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                            if (hero instanceof Mario){
-                                g.drawImage(ImageLoader.getMarioLeftImages()[((Mario) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                                if (iterator%Mario.getFrameDelay()==0){
-                                    ((Mario) hero).addFrame();
-                                }
-                            }
-                        }
-                        else{
-//                        g.drawImage(toLeftHero[i],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                            if (hero instanceof Mario){
-                                g.drawImage(ImageLoader.getMarioLeftImages()[((Mario) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
-                                if (iterator%Mario.getFrameDelay()==0){
-                                    ((Mario) hero).addFrame();
-                                }
-                            }
-                        }
-                    }
-                }
-                else{
-                    if (hero.getVy()==0){
-                        if (hero.getVx()==0){
+                        if (hero.isStandingOnSomething()){
                             if (level.getActivePart().getHeroes()[0].getX()<4002){
                                 if (hero instanceof Mario){
                                     g.drawImage(ImageLoader.getMarioInGameImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Luigi){
+                                    g.drawImage(ImageLoader.getLuigiInGameImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
                             else{
                                 if (hero instanceof Mario){
                                     g.drawImage(ImageLoader.getMarioInGameImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
-                            }
+                                if (hero instanceof Luigi){
+                                    g.drawImage(ImageLoader.getLuigiInGameImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
                             }
                         }
-                        else {
+                        else{
                             if (level.getActivePart().getHeroes()[0].getX()<4002){
                                 if (hero instanceof Mario){
                                     g.drawImage(ImageLoader.getMarioJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Luigi){
+                                    g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
                             else{
                                 if (hero instanceof Mario){
                                     g.drawImage(ImageLoader.getMarioJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
+                                if (hero instanceof Luigi){
+                                    g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
                             }
                         }
+                    }
+                    else if (hero.getVx()>0){
+                        if (level.getActivePart().getHeroes()[0].getX()<4002){
+                            if (hero instanceof Mario){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getMarioRightImages()[((Mario) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Mario.getFrameDelay()==0){
+                                        ((Mario) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getMarioJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Luigi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getLuigiRightImages()[((Luigi) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Luigi.getFrameDelay()==0){
+                                        ((Luigi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                        }
+                        else{
+                            if (hero instanceof Mario){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getMarioRightImages()[((Mario) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Mario.getFrameDelay()==0){
+                                        ((Mario) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getMarioJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Luigi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getLuigiRightImages()[((Luigi) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Luigi.getFrameDelay()==0){
+                                        ((Luigi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        if (level.getActivePart().getHeroes()[0].getX()<4002){
+                            if (hero instanceof Mario){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getMarioLeftImages()[((Mario) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Mario.getFrameDelay()==0){
+                                        ((Mario) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getMarioJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Luigi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getLuigiLeftImages()[((Luigi) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Luigi.getFrameDelay()==0){
+                                        ((Luigi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                        }
+                        else{
+                            if (hero instanceof Mario){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getMarioLeftImages()[((Mario) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Mario.getFrameDelay()==0){
+                                        ((Mario) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getMarioJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Luigi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getLuigiLeftImages()[((Luigi) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Luigi.getFrameDelay()==0){
+                                        ((Luigi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                        }
+                    }
+                }
+                else{
+                    if (level.getActivePart().getHeroes()[0].getX()<4002){
+                        if (hero instanceof Mario){
+                            g.drawImage(ImageLoader.getMarioJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
+                        if (hero instanceof Luigi){
+                            g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
+                    }
+                    else{
+                        if (hero instanceof Mario){
+                            g.drawImage(ImageLoader.getMarioJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
+                        if (hero instanceof Luigi){
+                            g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
+                    }
                 }
                 i++;
             }

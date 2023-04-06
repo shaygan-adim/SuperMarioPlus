@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class User {
@@ -17,7 +18,7 @@ public class User {
     private PartName[] partNames = new PartName[3];
     private int[] partScore = new int[3];
     private int[] partHeart = new int[3];
-    private HeroName[] ownedHeroes = new HeroName[]{HeroName.MARIO};
+    private HeroName[] ownedHeroes = new HeroName[]{HeroName.MARIO,HeroName.LUIGI};
     private HeroName activeHero = HeroName.MARIO;
     private int activeSlot;
 
@@ -55,6 +56,36 @@ public class User {
                 fileWriter.write(jsonString);
             }
         }
+    }
+    public int myRank(){
+        int i = 1;
+        for (User user : User.orderedUsers()){
+            if (user.getUsername().equals(this.username)){
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+    public static User[] orderedUsers(){
+        try {
+            UserLoader.loadUsers();
+        } catch (IOException e) {}
+        User[] users = UserLoader.getUsers();
+        boolean sorted = false;
+        User helperUser;
+        while (!sorted){
+            sorted = true;
+            for (int i = 0 ; i< users.length-1 ; i++){
+                if (users[i].highscore<users[i+1].highscore){
+                    sorted = false;
+                    helperUser = users[i];
+                    users[i] = users[i+1];
+                    users[i+1] = helperUser;
+                }
+            }
+        }
+        return users;
     }
 
     // Getters

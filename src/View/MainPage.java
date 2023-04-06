@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class MainPage extends MainFrame{
     // Fields
-    User user;
+    private User user;
     // Constructor
     public MainPage(User user) {
         super(500, 625, ImageLoader.getUserMenuImage());
@@ -35,6 +35,7 @@ public class MainPage extends MainFrame{
         JLabel coinLabel = new JLabel(String.valueOf(this.user.getCoin()));
         JLabel heroImage = null;
         if (this.user.getActiveHero() == HeroName.MARIO) heroImage = new JLabel(ImageLoader.getMarioImage());
+        if (this.user.getActiveHero() == HeroName.LUIGI) heroImage = new JLabel(ImageLoader.getLuigiImage());
 
         playButton.setFont(new Font("Forte",Font.PLAIN,20));
         leaderboardButton.setFont(new Font("Forte",Font.PLAIN,20));
@@ -45,6 +46,8 @@ public class MainPage extends MainFrame{
         characterLabel.setFont(new Font("Ink Free",Font.BOLD,12));
         usernameLabel.setFont(new Font("Ink Free",Font.BOLD,22));
         coinLabel.setFont(new Font("Ink Free",Font.BOLD,22));
+
+        characterLabel.setForeground(Color.BLACK);
 
         playButton.setFocusPainted(false);
         shopButton.setFocusPainted(false);
@@ -63,6 +66,13 @@ public class MainPage extends MainFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new SlotMenu(user);
+                MainPage.super.dispose();
+            }
+        });
+        leaderboardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RankingPage(user);
                 MainPage.super.dispose();
             }
         });

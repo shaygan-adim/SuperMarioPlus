@@ -27,22 +27,22 @@ public class Controller implements KeyListener{
     }
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT || keyPressed[0]){
+        if (e.getKeyCode() == KeyEvent.VK_D || keyPressed[0]){
             keyPressed[0] = true;
             this.physicsHandler.right();
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT || keyPressed[1]){
+        if (e.getKeyCode() == KeyEvent.VK_A || keyPressed[1]){
             keyPressed[1] = true;
             this.physicsHandler.left();
         }
     }
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        if (e.getKeyCode() == KeyEvent.VK_D){
             keyPressed[0] = false;
             this.physicsHandler.stop();
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        if (e.getKeyCode() == KeyEvent.VK_A){
             keyPressed[1] = false;
             this.physicsHandler.stop();
         }
