@@ -1,3 +1,3 @@
 package Model;
 
-public enum HeroName { MARIO , LUIGI}
+public enum HeroName { MARIO , LUIGI , PRINCESS , YOSHI , TOAD}

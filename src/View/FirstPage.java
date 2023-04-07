@@ -63,9 +63,4 @@ public class FirstPage extends MainFrame {
         registerButton.setBounds(175,330,130,50);
         exitButton.setBounds(200,400,80,40);
     }
-
-    public static void main(String[] args) throws IOException {
-        ImageLoader.load();
-        new FirstPage();
-    }
 }

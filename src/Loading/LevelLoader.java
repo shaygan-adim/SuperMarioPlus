@@ -56,7 +56,10 @@ abstract public class LevelLoader {
                     margin++;
                 }
                 pipes[i] = new Pipe(new int[]{Integer.valueOf(splitedLine[0].substring(margin)),Integer.valueOf(splitedLine[1])},plant);
-                if (plant!=null) plant.setPipe(pipes[i]);
+                if (plant!=null) {
+                    plant.setPipe(pipes[i]);
+                    plant.setCoordinates(new double[]{pipes[i].getCoordinates()[0]+pipes[i].getWidth()/2-172/2,pipes[i].getCoordinates()[1]-123});
+                }
             }
             br.close();
             fr.close();

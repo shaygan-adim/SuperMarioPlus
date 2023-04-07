@@ -14,11 +14,11 @@ public class User {
     private final String password;
     private int coin = 0;
     private int highscore = 0;
-    private int lastScore;
     private PartName[] partNames = new PartName[3];
     private int[] partScore = new int[3];
     private int[] partHeart = new int[3];
-    private HeroName[] ownedHeroes = new HeroName[]{HeroName.MARIO,HeroName.LUIGI};
+    private int[] partCoin = new int[3];
+    private HeroName[] ownedHeroes = new HeroName[]{HeroName.MARIO};
     private HeroName activeHero = HeroName.MARIO;
     private int activeSlot;
 
@@ -26,7 +26,6 @@ public class User {
     public User(String username, String password){
         this.username = username;
         this.password = password;
-        this.coin = coin;
 
         try {
             this.save();
@@ -96,9 +95,9 @@ public class User {
     public PartName[] getPartNames() {return partNames;}
     public int[] getPartScore() {return partScore;}
     public int[] getPartHeart() {return partHeart;}
+    public int[] getPartCoin() {return partCoin;}
     public HeroName[] getOwnedHeroes() {return ownedHeroes;}
     public HeroName getActiveHero() {return activeHero;}
-    public int getLastScore() {return lastScore;}
     public int getActiveSlot() {return activeSlot;}
 
     // Setters
@@ -110,11 +109,13 @@ public class User {
     public void setPartScore1(int a){this.partScore[0] = a;}
     public void setPartScore2(int a){this.partScore[1] = a;}
     public void setPartScore3(int a){this.partScore[2] = a;}
+    public void setPartCoin1(int a){this.partCoin[0] = a;}
+    public void setPartCoin2(int a){this.partCoin[1] = a;}
+    public void setPartCoin3(int a){this.partCoin[2] = a;}
     public void setPartHeart1(int a){this.partHeart[0] = a;}
     public void setPartHeart2(int a){this.partHeart[1] = a;}
     public void setPartHeart3(int a){this.partHeart[2] = a;}
     public void setOwnedHeroes(HeroName[] ownedHeroes) {this.ownedHeroes = ownedHeroes;}
     public void setActiveHero(HeroName activeHero) {this.activeHero = activeHero;}
-    public void setLastScore(int lastScore) {this.lastScore = lastScore;}
     public void setActiveSlot(int activeSlot) {this.activeSlot = activeSlot;}
 }

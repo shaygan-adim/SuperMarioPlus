@@ -99,7 +99,6 @@ public class RegisterPage extends MainFrame {
                     yUsernameImage.setVisible(true);
                 }
                 else{
-                    System.out.println(users.length);
                     nUsernameImage.setVisible(false);
                     yUsernameImage.setVisible(true);
                     for (User user : users){

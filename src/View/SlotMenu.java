@@ -110,6 +110,15 @@ public class SlotMenu extends MainFrame{
                 if (user.getActiveHero()==HeroName.LUIGI){
                     heroes[0] = new Luigi(3);
                 }
+                if (user.getActiveHero()==HeroName.PRINCESS){
+                    heroes[0] = new Princess(3);
+                }
+                if (user.getActiveHero()==HeroName.YOSHI){
+                    heroes[0] = new Yoshi(3);
+                }
+                if (user.getActiveHero()==HeroName.TOAD){
+                    heroes[0] = new Toad(3);
+                }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 user.setActiveSlot(1);
                 user.setPart1(null);
@@ -126,12 +135,21 @@ public class SlotMenu extends MainFrame{
                 Hero[] heroes = new Hero[1];
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(user.getPartHeart()[0]);
-                    heroes[0].setScore(user.getPartScore()[0]);
                 }
                 if (user.getActiveHero()==HeroName.LUIGI){
                     heroes[0] = new Luigi(user.getPartHeart()[0]);
-                    heroes[0].setScore(user.getPartScore()[0]);
                 }
+                if (user.getActiveHero()==HeroName.PRINCESS){
+                    heroes[0] = new Princess(user.getPartHeart()[0]);
+                }
+                if (user.getActiveHero()==HeroName.YOSHI){
+                    heroes[0] = new Yoshi(user.getPartHeart()[0]);
+                }
+                if (user.getActiveHero()==HeroName.TOAD){
+                    heroes[0] = new Toad(user.getPartHeart()[0]);
+                }
+                heroes[0].addCoin(user.getPartCoin()[0]);
+                heroes[0].setScore(user.getPartScore()[0]);
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 if (user.getPartNames()[0]==PartName.L1P1){
                     level.setActivePart(level.getParts()[0]);
@@ -154,6 +172,15 @@ public class SlotMenu extends MainFrame{
                 if (user.getActiveHero()==HeroName.LUIGI){
                     heroes[0] = new Luigi(3);
                 }
+                if (user.getActiveHero()==HeroName.PRINCESS){
+                    heroes[0] = new Princess(3);
+                }
+                if (user.getActiveHero()==HeroName.YOSHI){
+                    heroes[0] = new Yoshi(3);
+                }
+                if (user.getActiveHero()==HeroName.TOAD){
+                    heroes[0] = new Toad(3);
+                }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 user.setActiveSlot(2);
                 user.setPart2(null);
@@ -170,12 +197,21 @@ public class SlotMenu extends MainFrame{
                 Hero[] heroes = new Hero[1];
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(user.getPartHeart()[1]);
-                    heroes[0].setScore(user.getPartScore()[1]);
                 }
                 if (user.getActiveHero()==HeroName.LUIGI){
                     heroes[0] = new Luigi(user.getPartHeart()[1]);
-                    heroes[0].setScore(user.getPartScore()[1]);
                 }
+                if (user.getActiveHero()==HeroName.PRINCESS){
+                    heroes[0] = new Princess(user.getPartHeart()[1]);
+                }
+                if (user.getActiveHero()==HeroName.YOSHI){
+                    heroes[0] = new Yoshi(user.getPartHeart()[1]);
+                }
+                if (user.getActiveHero()==HeroName.TOAD){
+                    heroes[0] = new Toad(user.getPartHeart()[1]);
+                }
+                heroes[0].addCoin(user.getPartCoin()[1]);
+                heroes[0].setScore(user.getPartScore()[1]);
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 if (user.getPartNames()[1]==PartName.L1P1){
                     level.setActivePart(level.getParts()[0]);
@@ -198,6 +234,15 @@ public class SlotMenu extends MainFrame{
                 if (user.getActiveHero()==HeroName.LUIGI){
                     heroes[0] = new Luigi(3);
                 }
+                if (user.getActiveHero()==HeroName.PRINCESS){
+                    heroes[0] = new Princess(3);
+                }
+                if (user.getActiveHero()==HeroName.YOSHI){
+                    heroes[0] = new Yoshi(3);
+                }
+                if (user.getActiveHero()==HeroName.TOAD){
+                    heroes[0] = new Toad(3);
+                }
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 user.setActiveSlot(3);
                 user.setPart3(null);
@@ -214,12 +259,21 @@ public class SlotMenu extends MainFrame{
                 Hero[] heroes = new Hero[1];
                 if (user.getActiveHero()==HeroName.MARIO){
                     heroes[0] = new Mario(user.getPartHeart()[2]);
-                    heroes[0].setScore(user.getPartScore()[2]);
                 }
                 if (user.getActiveHero()==HeroName.LUIGI){
                     heroes[0] = new Luigi(user.getPartHeart()[2]);
-                    heroes[0].setScore(user.getPartScore()[2]);
                 }
+                if (user.getActiveHero()==HeroName.PRINCESS){
+                    heroes[0] = new Princess(user.getPartHeart()[2]);
+                }
+                if (user.getActiveHero()==HeroName.YOSHI){
+                    heroes[0] = new Yoshi(user.getPartHeart()[2]);
+                }
+                if (user.getActiveHero()==HeroName.TOAD){
+                    heroes[0] = new Toad(user.getPartHeart()[2]);
+                }
+                heroes[0].addCoin(user.getPartCoin()[2]);
+                heroes[0].setScore(user.getPartScore()[2]);
                 Level level = new Level(new Part[]{LevelLoader.newL1P1(heroes),LevelLoader.newL1P2(heroes)},0);
                 if (user.getPartNames()[2]==PartName.L1P1){
                     level.setActivePart(level.getParts()[0]);

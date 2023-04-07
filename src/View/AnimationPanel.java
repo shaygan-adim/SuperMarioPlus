@@ -39,8 +39,6 @@ public class AnimationPanel extends JPanel {
 
         // Loading heroes' images
         Image[] standingHero = new Image[level.getActivePart().getHeroes().length];
-        Image[] toRightHero = new Image[level.getActivePart().getHeroes().length];
-        Image[] toLeftHero = new Image[level.getActivePart().getHeroes().length];
         int i = 0;
         for (Hero hero : level.getActivePart().getHeroes()){
             if (hero instanceof Mario){
@@ -48,6 +46,15 @@ public class AnimationPanel extends JPanel {
             }
             if (hero instanceof Luigi){
                 standingHero[i]=ImageLoader.getLuigiInGameImage();
+            }
+            if (hero instanceof Princess){
+                standingHero[i]=ImageLoader.getPrincessInGameImage();
+            }
+            if (hero instanceof Yoshi){
+                standingHero[i]=ImageLoader.getYoshiInGameImage();
+            }
+            if (hero instanceof Toad){
+                standingHero[i]=ImageLoader.getToadInGameImage();
             }
             i++;
         }
@@ -88,7 +95,7 @@ public class AnimationPanel extends JPanel {
             for (Enemy enemy : level.getActivePart().getEnemies()){
                 if (enemy instanceof Plant){
                     if (((Plant) enemy).isVisible()){
-                        g.drawImage(ImageLoader.getPlantImage(),((Plant) enemy).getPipe().getCoordinates()[0]+((Plant) enemy).getPipe().getWidth()/2-enemy.getWidth()/2-(int) level.getActivePart().getHeroes()[0].getX()+150,((Plant) enemy).getPipe().getCoordinates()[1]-enemy.getHeight(),enemy.getWidth(),enemy.getHeight(),this);
+                        g.drawImage(ImageLoader.getPlantImage(),(int)(enemy.getX()-(int) level.getActivePart().getHeroes()[0].getX()+150),(int) enemy.getY(),enemy.getWidth(),enemy.getHeight(),this);
                     }
                 }
             }
@@ -118,6 +125,15 @@ public class AnimationPanel extends JPanel {
                                 if (hero instanceof Luigi){
                                     g.drawImage(ImageLoader.getLuigiInGameImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
+                                if (hero instanceof Princess){
+                                    g.drawImage(ImageLoader.getPrincessInGameImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Yoshi){
+                                    g.drawImage(ImageLoader.getYoshiInGameImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Toad){
+                                    g.drawImage(ImageLoader.getToadInGameImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
                             }
                             else{
                                 if (hero instanceof Mario){
@@ -125,6 +141,15 @@ public class AnimationPanel extends JPanel {
                                 }
                                 if (hero instanceof Luigi){
                                     g.drawImage(ImageLoader.getLuigiInGameImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Princess){
+                                    g.drawImage(ImageLoader.getPrincessInGameImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Yoshi){
+                                    g.drawImage(ImageLoader.getYoshiInGameImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Toad){
+                                    g.drawImage(ImageLoader.getToadInGameImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
                         }
@@ -136,6 +161,20 @@ public class AnimationPanel extends JPanel {
                                 if (hero instanceof Luigi){
                                     g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
+                                if (hero instanceof Princess){
+                                    g.drawImage(ImageLoader.getPrincessJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Yoshi){
+                                    if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                        g.drawImage(ImageLoader.getYoshiJumpRightImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                    else{
+                                        g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                }
+                                if (hero instanceof Toad){
+                                    g.drawImage(ImageLoader.getToadJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
                             }
                             else{
                                 if (hero instanceof Mario){
@@ -143,6 +182,20 @@ public class AnimationPanel extends JPanel {
                                 }
                                 if (hero instanceof Luigi){
                                     g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Princess){
+                                    g.drawImage(ImageLoader.getPrincessJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                                if (hero instanceof Yoshi){
+                                    if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                        g.drawImage(ImageLoader.getYoshiJumpRightImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                    else{
+                                        g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                }
+                                if (hero instanceof Toad){
+                                    g.drawImage(ImageLoader.getToadJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
                         }
@@ -171,6 +224,44 @@ public class AnimationPanel extends JPanel {
                                     g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
+                            if (hero instanceof Princess){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getPrincessRightImages()[((Princess) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Princess.getFrameDelay()==0){
+                                        ((Princess) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getPrincessJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Yoshi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getYoshiRightImages()[((Yoshi) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Yoshi.getFrameDelay()==0){
+                                        ((Yoshi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                        g.drawImage(ImageLoader.getYoshiJumpRightImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                    else{
+                                        g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                }
+                            }
+                            if (hero instanceof Toad){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getToadRightImages()[((Toad) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Toad.getFrameDelay()==0){
+                                        ((Toad) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getToadJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
                         }
                         else{
                             if (hero instanceof Mario){
@@ -193,6 +284,44 @@ public class AnimationPanel extends JPanel {
                                 }
                                 else{
                                     g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Princess){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getPrincessRightImages()[((Princess) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Princess.getFrameDelay()==0){
+                                        ((Princess) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getPrincessJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Yoshi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getYoshiRightImages()[((Yoshi) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Yoshi.getFrameDelay()==0){
+                                        ((Yoshi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                        g.drawImage(ImageLoader.getYoshiJumpRightImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                    else{
+                                        g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                }
+                            }
+                            if (hero instanceof Toad){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getToadRightImages()[((Toad) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Toad.getFrameDelay()==0){
+                                        ((Toad) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getToadJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
                         }
@@ -221,6 +350,44 @@ public class AnimationPanel extends JPanel {
                                     g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
+                            if (hero instanceof Princess){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getPrincessLeftImages()[((Princess) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Princess.getFrameDelay()==0){
+                                        ((Princess) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getPrincessJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Yoshi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getYoshiLeftImages()[((Yoshi) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Yoshi.getFrameDelay()==0){
+                                        ((Yoshi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                        g.drawImage(ImageLoader.getYoshiJumpRightImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                    else{
+                                        g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                }
+                            }
+                            if (hero instanceof Toad){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getToadLeftImages()[((Toad) hero).getFrameNumber()],150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Toad.getFrameDelay()==0){
+                                        ((Toad) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getToadJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
                         }
                         else{
                             if (hero instanceof Mario){
@@ -245,6 +412,44 @@ public class AnimationPanel extends JPanel {
                                     g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                                 }
                             }
+                            if (hero instanceof Princess){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getPrincessLeftImages()[((Princess) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Princess.getFrameDelay()==0){
+                                        ((Princess) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getPrincessJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
+                            if (hero instanceof Yoshi){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getYoshiLeftImages()[((Yoshi) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Yoshi.getFrameDelay()==0){
+                                        ((Yoshi) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                        g.drawImage(ImageLoader.getYoshiJumpRightImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                    else{
+                                        g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    }
+                                }
+                            }
+                            if (hero instanceof Toad){
+                                if (hero.isStandingOnSomething()){
+                                    g.drawImage(ImageLoader.getToadLeftImages()[((Toad) hero).getFrameNumber()],150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                    if (iterator%Toad.getFrameDelay()==0){
+                                        ((Toad) hero).addFrame();
+                                    }
+                                }
+                                else{
+                                    g.drawImage(ImageLoader.getToadJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                                }
+                            }
                         }
                     }
                 }
@@ -256,6 +461,20 @@ public class AnimationPanel extends JPanel {
                         if (hero instanceof Luigi){
                             g.drawImage(ImageLoader.getLuigiJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                         }
+                        if (hero instanceof Princess){
+                            g.drawImage(ImageLoader.getPrincessJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
+                        if (hero instanceof Yoshi){
+                            if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                g.drawImage(ImageLoader.getYoshiJumpRightImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                            }
+                            else{
+                                g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                            }
+                        }
+                        if (hero instanceof Toad){
+                            g.drawImage(ImageLoader.getToadJumpImage(),150,(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
                     }
                     else{
                         if (hero instanceof Mario){
@@ -263,6 +482,20 @@ public class AnimationPanel extends JPanel {
                         }
                         if (hero instanceof Luigi){
                             g.drawImage(ImageLoader.getLuigiJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
+                        if (hero instanceof Princess){
+                            g.drawImage(ImageLoader.getPrincessJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                        }
+                        if (hero instanceof Yoshi){
+                            if (level.getActivePart().getHeroes()[0].getVx()>=0){
+                                g.drawImage(ImageLoader.getYoshiJumpRightImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                            }
+                            else{
+                                g.drawImage(ImageLoader.getYoshiJumpLeftImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
+                            }
+                        }
+                        if (hero instanceof Toad){
+                            g.drawImage(ImageLoader.getToadJumpImage(),150-4002+(int) level.getActivePart().getHeroes()[0].getX(),(int)hero.getY(),standingHero[i].getWidth(this),standingHero[i].getHeight(this),this);
                         }
                     }
                 }

@@ -36,6 +36,9 @@ public class MainPage extends MainFrame{
         JLabel heroImage = null;
         if (this.user.getActiveHero() == HeroName.MARIO) heroImage = new JLabel(ImageLoader.getMarioImage());
         if (this.user.getActiveHero() == HeroName.LUIGI) heroImage = new JLabel(ImageLoader.getLuigiImage());
+        if (this.user.getActiveHero() == HeroName.PRINCESS) heroImage = new JLabel(ImageLoader.getPrincessImage());
+        if (this.user.getActiveHero() == HeroName.YOSHI) heroImage = new JLabel(ImageLoader.getYoshiImage());
+        if (this.user.getActiveHero() == HeroName.TOAD) heroImage = new JLabel(ImageLoader.getToadImage());
 
         playButton.setFont(new Font("Forte",Font.PLAIN,20));
         leaderboardButton.setFont(new Font("Forte",Font.PLAIN,20));
@@ -73,6 +76,13 @@ public class MainPage extends MainFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new RankingPage(user);
+                MainPage.super.dispose();
+            }
+        });
+        shopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ShopPage(user);
                 MainPage.super.dispose();
             }
         });

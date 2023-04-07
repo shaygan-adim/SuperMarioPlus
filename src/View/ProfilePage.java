@@ -11,12 +11,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ProfilePage extends MainFrame{
     // Fields
     private User user;
-    private JLabel hero1Image,hero2Image = null;
+    private List<JLabel> heroesImages = new ArrayList<>();
     Border border1 = BorderFactory.createLineBorder(Color.BLACK, 5);
     Border border2 = BorderFactory.createLineBorder(Color.GRAY, 5);
     // Constructor
@@ -40,26 +43,38 @@ public class ProfilePage extends MainFrame{
     @Override
     void initComponents() {
         // Initializing and configuring the components
-        JLabel usernameLabel = new JLabel("Username : "+this.user.getUsername());
+        JLabel usernameLabel = new JLabel(this.user.getUsername());
         JLabel coinImage = new JLabel(ImageLoader.getCoinBiggerImage());
         JLabel coinLabel = new JLabel(String.valueOf(this.user.getCoin()));
-        JLabel highscoreLabel = new JLabel("Highscore : "+this.user.getHighscore());
+        JLabel highscoreImage = new JLabel(ImageLoader.getHighscoreImage());
+        JLabel highscoreLabel = new JLabel(String.valueOf(this.user.getHighscore()));
         JLabel characterLabel = new JLabel("Characters :");
-        hero1Image = new JLabel(ImageLoader.getMarioSmallImage());
-        if (Arrays.asList(this.user.getOwnedHeroes()).contains(HeroName.LUIGI)) {
-            hero2Image = new JLabel(ImageLoader.getLuigiSmallImage());
+        for (HeroName heroName : user.getOwnedHeroes()){
+            if (heroName==HeroName.MARIO){
+                heroesImages.add(new JLabel(ImageLoader.getMarioSmallImage()));
+            }
+            if (heroName==HeroName.LUIGI){
+                heroesImages.add(new JLabel(ImageLoader.getLuigiSmallImage()));
+            }
+            if (heroName==HeroName.PRINCESS){
+                heroesImages.add(new JLabel(ImageLoader.getPrincessSmallImage()));
+            }
+            if (heroName==HeroName.YOSHI){
+                heroesImages.add(new JLabel(ImageLoader.getYoshiSmallImage()));
+            }
+            if (heroName==HeroName.TOAD){
+                heroesImages.add(new JLabel(ImageLoader.getToadSmallImage()));
+            }
         }
         JButton backButton = new JButton("Back");
         JButton logoutButton = new JButton("Logout");
 
-        usernameLabel.setFont(new Font("Forte",Font.PLAIN,25));
+        usernameLabel.setFont(new Font("Forte",Font.PLAIN,35));
         coinLabel.setFont(new Font("Forte",Font.PLAIN,35));
-        highscoreLabel.setFont(new Font("Forte",Font.PLAIN,25));
+        highscoreLabel.setFont(new Font("Forte",Font.PLAIN,35));
         characterLabel.setFont(new Font("Forte",Font.PLAIN,17));
         backButton.setFont(new Font("Forte",Font.PLAIN,17));
         logoutButton.setFont(new Font("Forte",Font.PLAIN,17));
-
-        hero1Image.setBorder(border1);
 
         backButton.setFocusPainted(false);
         logoutButton.setFocusPainted(false);
@@ -87,42 +102,55 @@ public class ProfilePage extends MainFrame{
         super.mainPanel.add(usernameLabel);
         super.mainPanel.add(coinImage);
         super.mainPanel.add(coinLabel);
+        super.mainPanel.add(highscoreImage);
         super.mainPanel.add(highscoreLabel);
         super.mainPanel.add(characterLabel);
-        super.mainPanel.add(hero1Image);
-        if (hero2Image!=null){
-            super.mainPanel.add(hero2Image);
+        for (JLabel jlabel : heroesImages){
+            super.mainPanel.add(jlabel);
         }
         super.mainPanel.add(backButton);
         super.mainPanel.add(logoutButton);
 
-        usernameLabel.setBounds(140,0,400,100);
-        highscoreLabel.setBounds(140,70,300,50);
-        coinImage.setBounds(110,90,100,100);
-        coinLabel.setBounds(195,120,150,50);
-        characterLabel.setBounds(200,170,150,55);
-        hero1Image.setBounds(30,220,100,155);
-        if (hero2Image!=null){
-            hero2Image.setBounds(140,220,100,155);
+        usernameLabel.setBounds(20,-10,400,100);
+        highscoreImage.setBounds(150-35,13-5,150,150);
+        highscoreLabel.setBounds(220,67-5,300,50);
+        coinImage.setBounds(-10,38-5,100,100);
+        coinLabel.setBounds(70,67-5,150,50);
+        characterLabel.setBounds(200,120,150,55);
+        int i = 0;
+        for (JLabel jLabel : heroesImages){
+            if (i/110<=3){
+                jLabel.setBounds(i+30,170,100,155);
+            }
+            else{
+                jLabel.setBounds((i-4*110)+30,340,100,155);
+            }
+            i+=110;
         }
-        backButton.setBounds(135,400,90,40);
-        logoutButton.setBounds(255,400,90,40);
+        backButton.setBounds(360,25,90,40);
+        logoutButton.setBounds(360,75,90,40);
     }
     void mouseLoop(){
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY() - 30;
-                if(x>30 && x<130 && y>220 && y<375){
-                    hero1Image.setBorder(null);
-                    hero2Image.setBorder(border1);
-                    user.setActiveHero(HeroName.MARIO);
-                }
-                if (hero2Image!=null){
-                    if(x>140 && x<240 && y>220 && y<375){
-                        hero1Image.setBorder(null);
-                        hero2Image.setBorder(border1);
-                        user.setActiveHero(HeroName.LUIGI);
+                for (int i = 30 ; i<=heroesImages.size()*110+30 ; i+=110){
+                    if ((i-30)/110<=3){
+                        if(x>i && x<i+100 && y>170 && y<325){
+                            user.setActiveHero(user.getOwnedHeroes()[(i-30)/110]);
+                            try {
+                                user.save();
+                            } catch (IOException ex) {}
+                        }
+                    }
+                    else{
+                        if(x>30+((i-30)/110)%4*110 && x<30+((i-30)/110)%4*110+100 && y>340 && y<495){
+                            user.setActiveHero(user.getOwnedHeroes()[(30+((i-30)/110)%4*110-30)/110+4]);
+                            try {
+                                user.save();
+                            } catch (IOException ex) {}
+                        }
                     }
                 }
             }
@@ -138,28 +166,28 @@ public class ProfilePage extends MainFrame{
             // calculate the position of the mouse pointer relative to the JFrame
             int relativeX = mouseX - frameX;
             int relativeY = mouseY - frameY - 30;
-            int n = 0;
-            if(relativeX>30 && relativeX<130 && relativeY>220 && relativeY<375){
-                hero2Image.setBorder(null);
-                hero1Image.setBorder(border2);
-                n++;
-            }
-            if (hero2Image!=null){
-                if(relativeX>140 && relativeX<240 && relativeY>220 && relativeY<375){
-                    hero1Image.setBorder(null);
-                    hero2Image.setBorder(border2);
-                    n++;
+
+            int i = 0;
+            for (JLabel jLabel : heroesImages) {
+                if (i<=3){
+                    if (relativeX > i * 110 + 30 && relativeX < i * 110 + 30 + 100 && relativeY > 170 && relativeY < 325) {
+                        jLabel.setBorder(border2);
+                    } else if (user.getOwnedHeroes()[i] == user.getActiveHero()) {
+                        jLabel.setBorder(border1);
+                    } else {
+                        jLabel.setBorder(null);
+                    }
                 }
-            }
-            if (n==0){
-                if (user.getOwnedHeroes()[0]==user.getActiveHero()){
-                    hero2Image.setBorder(null);
-                    hero1Image.setBorder(border1);
+                else{
+                    if (relativeX > i%4 * 110 + 30 && relativeX < i%4 * 110 + 30 + 100 && relativeY > 340 && relativeY < 495) {
+                        jLabel.setBorder(border2);
+                    } else if (user.getOwnedHeroes()[i] == user.getActiveHero()) {
+                        jLabel.setBorder(border1);
+                    } else {
+                        jLabel.setBorder(null);
+                    }
                 }
-                if (user.getOwnedHeroes()[1]==user.getActiveHero()){
-                    hero1Image.setBorder(null);
-                    hero2Image.setBorder(border1);
-                }
+                i++;
             }
         }
     }
