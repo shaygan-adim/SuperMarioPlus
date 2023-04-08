@@ -163,7 +163,7 @@ public class ShopPage extends MainFrame{
         heroesButtons.get(3).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (user.getCoin()<Yoshi.getPrice()){
+                if (user.getCoin()<Toad.getPrice()){
                     JOptionPane.showMessageDialog(null,"You miss "+(Toad.getPrice()-user.getCoin())+" coins to buy this character.","Not Enough Coins",JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
